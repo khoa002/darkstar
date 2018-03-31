@@ -2149,6 +2149,8 @@ namespace battleutils
             }
         }
 
+        int16 standbyTp = 0;
+
         if (damage > 0)
         {
             PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
@@ -2210,8 +2212,9 @@ namespace battleutils
 
             // add tp to attacker
             if (primary)
+            // Calculate TP Return from WS
             {
-                PChar->addTP((int16)(((tpMultiplier * baseTp) + bonusTP) * (1.0f + 0.01f * (float)((PChar->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PChar))))));
+                standbyTp = ((int16)(((tpMultiplier * baseTp) + bonusTP) * (1.0f + 0.01f * (float)((PChar->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PChar))))));
             }
 
             //account for attacker's subtle blow which reduces the baseTP gain for the defender
@@ -2228,6 +2231,15 @@ namespace battleutils
 
         if (!isRanged)
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
+
+        // Apply TP
+        PChar->addTP(std::max((PChar->getMod(Mod::SAVETP)), standbyTp));
+
+        // Remove Hagakure Effect if present
+        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_HAGAKURE))
+        {
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HAGAKURE);
+        }
 
         return damage;
     }
@@ -4661,7 +4673,7 @@ namespace battleutils
             {
                 // don't draw in dead players for now!
                 // see tractor
-                if (PMember->isDead() || PMember->animation == ANIMATION_CHOCOBO)
+                if (PMember->isDead() || PMember->isMounted())
                 {
                     // don't do anything
                 }
@@ -4869,6 +4881,8 @@ namespace battleutils
 
     void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
     {
+        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+
         for (auto&& PTrait : *traitList)
         {
             if (level >= PTrait->getLevel() && PTrait->getLevel() > 0)
@@ -4881,6 +4895,24 @@ namespace battleutils
 
                     if (PExistingTrait->getID() == PTrait->getID())
                     {
+                        // Check if we still have the merit required for this trait
+                        if (PChar)
+                        {
+                            if (PExistingTrait->getMeritID() > 0)
+                            {
+                                if (PChar->PMeritPoints->GetMerit((MERIT_TYPE)PExistingTrait->getMeritID())->count == 0)
+                                {
+                                    PEntity->delTrait(PExistingTrait);
+                                    break;
+                                }
+                                else if (PExistingTrait->getMeritID() == PTrait->getMeritID())
+                                {
+                                    add = false;
+                                    break;
+                                }
+                            }
+                        }
+
                         if (PExistingTrait->getRank() < PTrait->getRank())
                         {
                             PEntity->delTrait(PExistingTrait);
@@ -4898,6 +4930,16 @@ namespace battleutils
                         }
                     }
                 }
+
+                // Don't add traits that aren't merited yet
+                if (PChar)
+                {
+                    if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MERIT_TYPE)PTrait->getMeritID())->count == 0)
+                    {
+                        add = false;
+                    }
+                }
+
                 if (add)
                 {
                     PEntity->addTrait(PTrait);
