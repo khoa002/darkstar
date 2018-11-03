@@ -206,7 +206,7 @@ namespace luautils
     int32 OnManeuverLose(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
 
     int32 OnItemUse(CBaseEntity* PTarget, CItem* PItem);                        // triggers when item is used
-    int32 OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr);    // check to see if item can be used
+    std::tuple<int32, int32, int32> OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr);    // check to see if item can be used
     int32 CheckForGearSet(CBaseEntity* PTarget);                                // check for gear sets
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);    // triggers when a player attempts to cast a spell
@@ -261,7 +261,6 @@ namespace luautils
     int32 DisallowRespawn(lua_State* L);                                               // Allow or prevent a mob from spawning
     int32 UpdateNMSpawnPoint(lua_State* L);                                     // Update the spawn point of an NM
     int32 SetDropRate(lua_State*);                                              // Set drop rate of a mob setDropRate(dropid,itemid,newrate)
-    int32 UpdateTreasureSpawnPoint(lua_State* L);                               // Update the spawn point of an Treasure
     int32 UpdateServerMessage(lua_State*);                                      // update server message, first modify in conf and update
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for items with additional effects
@@ -274,6 +273,8 @@ namespace luautils
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre);                           // chocobo digging, pre = check
     bool LoadEventScript(CCharEntity* PChar, const char* functionName);    // Utility method: checks for and loads a lua function for events
+
+    uint16 GetDespoilDebuff(uint16 itemId);                                   // Ask the database for an effectId based on Item despoiled (returns 0 if not in db)
 };
 
 #endif //- _LUAUTILS_H -
