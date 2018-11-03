@@ -500,11 +500,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Ghrah',123,1445);
 INSERT INTO `mob_skill_lists` VALUES ('Ghrah',123,1446);
 INSERT INTO `mob_skill_lists` VALUES ('Ghrah',124,1444);
 INSERT INTO `mob_skill_lists` VALUES ('Ghrah',124,1441);
-INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,922);
-INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,923);
-INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,924);
-INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,402);
-INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,926);
+
+-- Non NM Roc type Bird
+INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,399); -- Scratch
+INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,400); -- Triple Attack
+INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,401); -- Gliding Spike
+INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,402); -- Feather Barrier
+INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,403); -- Stormwind
+
 INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,662);
 INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,663);
 INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,664);
@@ -1124,9 +1127,9 @@ INSERT INTO `mob_skill_lists` VALUES ('CynoprosopiWyrm',261,958);
 INSERT INTO `mob_skill_lists` VALUES ('Wyrm',262,951);
 INSERT INTO `mob_skill_lists` VALUES ('Wyrm',262,952);
 INSERT INTO `mob_skill_lists` VALUES ('Wyrm',262,953);
-INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,951);
+INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1039); -- Outside alliance targeting version of Hurricane Wing
 INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1040); -- Outside alliance targeting version of Spike Flail
-INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,953);
+INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1041); -- Outside alliance targeting version of Dragon Breath
 INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,957);
 INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1046);
 INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,813);
@@ -1317,18 +1320,18 @@ INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1781);
 INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1782);
 INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1783);
 INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1784);
--- INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2047);
--- INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2043);
--- INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2045);
--- INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2041);
--- INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2064);
--- INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1920);
-INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1921);
-INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1922);
-INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1923);
-INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1924);
--- INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1925);
--- INSERT INTO `mob_skill_lists` VALUES ('GotohZhaTheRe',305,1926);
+INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2043);
+INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2044);
+INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2045);
+INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2041);
+INSERT INTO `mob_skill_lists` VALUES ('ArmedGears',304,2053);
+-- INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1920);
+INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1921);
+INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1922);
+INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1923);
+INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1924);
+-- INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1925);
+-- INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1926);
 INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1743);
 INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1744);
 INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1745);
@@ -2165,8 +2168,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,982); -- Abyssal Drain
 INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,983); -- Abyssal strike
 INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,695); -- Blood Weapon
 INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,1002); -- Summonshadows
--- INSERT INTO `mob_skill_lists` VALUES ('Ajido-Marujido',481,970); -- Why is Savage Blade here? .. Wrong ID
--- INSERT INTO `mob_skill_lists` VALUES ('Ajido-Marujido',481,971); -- Why is Royal Bash here?   .. Wrong ID
+INSERT INTO `mob_skill_lists` VALUES ('Ajido-Marujido',481,988); -- Warp In (Works the same as Ealdnarche's)
+INSERT INTO `mob_skill_lists` VALUES ('Ajido-Marujido',481,989); -- Warp Out (Works the same as Ealdnarche's)
 INSERT INTO `mob_skill_lists` VALUES ('Volker',482,973); -- Red Lotus Blade
 INSERT INTO `mob_skill_lists` VALUES ('Volker',482,974); -- Spirits Within
 INSERT INTO `mob_skill_lists` VALUES ('Volker',482,975); -- Vorpal Blade
@@ -3623,3 +3626,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Chariot_Armed',1000,2060); -- brainjack
 INSERT INTO `mob_skill_lists` VALUES ('Chariot_Battle',1001,2059); -- discoid
 INSERT INTO `mob_skill_lists` VALUES ('Chariot_Armored',1002,2057); -- mortal revolution
 INSERT INTO `mob_skill_lists` VALUES ('Chariot_Bowed',1003,2058); -- homing missle
+
+INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,922); -- Blind Vortex
+INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,923); -- Giga Scream
+INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,924); -- Dread Dive
+INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,402); -- Feather Barrier
+-- INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,925); -- Feather Barrier (For now using 402. Retail data needed. Diff is likely animation time.)
+INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,926); -- Stormwind
+INSERT INTO `mob_skill_lists` VALUES ('Nargun',1005,677); -- Thunder Break
+INSERT INTO `mob_skill_lists` VALUES ('Ignamoth',1006,1952);
+INSERT INTO `mob_skill_lists` VALUES ('Ignamoth',1006,1956);
+INSERT INTO `mob_skill_lists` VALUES ('Ankabut',1007,704);
