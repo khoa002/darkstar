@@ -1,13 +1,10 @@
 -----------------------------------
 -- Area: FeiYin
---  MOB: Droma
+--  Mob: Droma
 -----------------------------------
 require("scripts/globals/regimes")
 require("scripts/globals/keyitems");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobDeath(mob, player, isKiller)
 

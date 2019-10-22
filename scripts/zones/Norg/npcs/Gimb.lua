@@ -11,7 +11,7 @@ end;
 
 function onTrigger(player,npc)
     player:startEvent(69);
-    player:setVar("SahaginKeyProgress",1);
+    player:setCharVar("SahaginKeyProgress",1);
 end;
 
 function onEventUpdate(player,csid,option)
@@ -19,4 +19,3 @@ end;
 
 function onEventFinish(player,csid,option)
 end;
-

@@ -925,18 +925,33 @@ local regimeInfo = {
 }
 
 local function getPageByRegimeId(regimeType, zoneId, regimeId)
-    local pages = regimeInfo[regimeType].zone[zoneId].page
-    for _, v in pairs(pages) do
+    local info = regimeInfo[regimeType]
+    if not info then return nil end
+
+    info = info.zone[zoneId]
+    if not info then return nil end
+
+    info = info.page
+    if not info then return nil end
+
+    for _, v in pairs(info) do
         if v[8] == regimeId then
             return v
         end
     end
+
     return nil
 end
 
 local function getPageByNum(regimeType, zoneId, pageNum)
-    local pages = regimeInfo[regimeType].zone[zoneId].page
-    return pages[pageNum]
+    local info = regimeInfo[regimeType]
+    if not info then return nil end
+
+    info = info.zone[zoneId]
+    if not info then return nil end
+
+    info = info.page
+    return info[pageNum]
 end
 
 local function getUpdateOpts(regimeType)
@@ -961,12 +976,22 @@ local function getFinishOpts(regimeType)
     return out
 end
 
+local function clearPlayerVars(player)
+    player:setCharVar("[regime]type", 0)
+    player:setCharVar("[regime]zone", 0)
+    player:setCharVar("[regime]id", 0)
+    player:setCharVar("[regime]repeat", 0)
+    player:setCharVar("[regime]lastReward", 0)
+
+    for i = 1, 4 do
+        player:setCharVar("[regime]needed" .. i, 0)
+        player:setCharVar("[regime]killed" .. i, 0)
+    end
+end
+
 dsp.regime.bookOnTrigger = function(player, regimeType)
     if (regimeType == dsp.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == dsp.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
-        local zoneId = player:getZoneID()
-        local info = regimeInfo[regimeType].zone[zoneId]
-        local tabs = player:getCurrency("valor_point")
-        local regimeId = player:getVar("fov_regimeid")
+        local info = regimeInfo[regimeType].zone[player:getZoneID()]
 
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
@@ -978,37 +1003,33 @@ dsp.regime.bookOnTrigger = function(player, regimeType)
             end
         end
 
-        player:startEvent(info.event, 0, arg2, 0, 0, 0, 0, tabs, regimeId)
+        player:startEvent(info.event, 0, arg2, 0, 0, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
     else
         player:PrintToPlayer("Disabled.")
     end
 end
 
 dsp.regime.bookOnEventUpdate = function(player, option, regimeType)
-    local pRegime = player:getVar("fov_regimeid")
-    local zoneId = player:getZoneID()
+    local page = getPageByRegimeId(player:getCharVar("[regime]type"), player:getCharVar("[regime]zone"), player:getCharVar("[regime]id"))
 
     -- check valid option
     local opts = getUpdateOpts(regimeType)
     local opt = opts[option]
 
     if not opt then
-        print("returning")
         return
     end
 
     -- review current training regime: progress on mobs
-    if opt.review then
-        local page = getPageByRegimeId(regimeType, zoneId, pRegime)
-        local n1 = (page[1] ~= 0) and player:getVar("fov_numkilled1") or 0
-        local n2 = (page[2] ~= 0) and player:getVar("fov_numkilled2") or 0
-        local n3 = (page[3] ~= 0) and player:getVar("fov_numkilled3") or 0
-        local n4 = (page[4] ~= 0) and player:getVar("fov_numkilled4") or 0
+    if opt.review and page then
+        local n1 = (page[1] ~= 0) and player:getCharVar("[regime]killed1") or 0
+        local n2 = (page[2] ~= 0) and player:getCharVar("[regime]killed2") or 0
+        local n3 = (page[3] ~= 0) and player:getCharVar("[regime]killed3") or 0
+        local n4 = (page[4] ~= 0) and player:getCharVar("[regime]killed4") or 0
         player:updateEvent(page[1], page[2], page[3], page[4], n1, n2, n3, n4)
 
     -- review current training regime: level range and training area
-    elseif opt.details then
-        local page = getPageByRegimeId(regimeType, zoneId, pRegime)
+    elseif opt.details and page then
         player:updateEvent(0, 0, 0, 0, 0, page[5], page[6], 0)
 
     -- TO DO: read about prowesses
@@ -1017,7 +1038,7 @@ dsp.regime.bookOnEventUpdate = function(player, option, regimeType)
 
     -- select a regime
     elseif opt.page then
-        local page = getPageByNum(regimeType, zoneId, opt.page)
+        local page = getPageByNum(regimeType, player:getZoneID(), opt.page)
         if page then
             player:updateEvent(page[1], page[2], page[3], page[4], 0, page[5], page[6], page[8])
         end
@@ -1058,11 +1079,7 @@ dsp.regime.bookOnEventFinish = function(player, option, regimeType)
         player:delCurrency("valor_point", opt.cost)
 
         if act == "CANCEL_REGIME" then
-            player:setVar("fov_regimeid" , 0)
-            player:setVar("fov_numkilled1", 0)
-            player:setVar("fov_numkilled2", 0)
-            player:setVar("fov_numkilled3", 0)
-            player:setVar("fov_numkilled4", 0)
+            clearPlayerVars(player)
             player:showText(player, msgOffset + 2) -- Training regime canceled.
 
         elseif act == "REPATRIATION" then
@@ -1166,12 +1183,14 @@ dsp.regime.bookOnEventFinish = function(player, option, regimeType)
                 regimeRepeat = 1
             end
 
-            player:setVar("fov_regimeid", page[8])
-            player:setVar("fov_repeat", regimeRepeat)
+            player:setCharVar("[regime]type", regimeType)
+            player:setCharVar("[regime]zone", zoneId)
+            player:setCharVar("[regime]id", page[8])
+            player:setCharVar("[regime]repeat", regimeRepeat)
 
             for i = 1, 4 do
-                player:setVar("fov_numkilled" .. i, 0)
-                player:setVar("fov_numneeded" .. i, page[i])
+                player:setCharVar("[regime]killed" .. i, 0)
+                player:setCharVar("[regime]needed" .. i, page[i])
             end
 
             player:showText(player, msgOffset)
@@ -1183,7 +1202,7 @@ end
 dsp.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- dead players, or players not on this training regime, get no credit
-    if not player or player:getHP() == 0 or player:getVar("fov_regimeid") ~= regimeId then
+    if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
         return
     end
 
@@ -1192,14 +1211,14 @@ dsp.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- mobs that give no XP give no credit, unless LOW_LEVEL_REGIME is 1 in settings.lua
-    if not player:checkValorCredit(mob) and LOW_LEVEL_REGIME == 0 then
+    -- mobs that give no XP give no credit
+    if not player:checkKillCredit(mob) then
         return
     end
 
     -- get number of this mob needed, and killed so far
-    local needed = player:getVar("fov_numneeded" .. index)
-    local killed = player:getVar("fov_numkilled" .. index)
+    local needed = player:getCharVar("[regime]needed" .. index)
+    local killed = player:getCharVar("[regime]killed" .. index)
 
     -- already finished with this mob
     if killed == needed then
@@ -1209,7 +1228,7 @@ dsp.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     -- increment number killed
     killed = killed + 1
     player:messageBasic(dsp.msg.basic.FOV_DEFEATED_TARGET, killed, needed)
-    player:setVar("fov_numkilled" .. index, killed)
+    player:setCharVar("[regime]killed" .. index, killed)
 
     -- this mob is not yet finished
     if needed > killed then
@@ -1217,12 +1236,14 @@ dsp.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     end
 
     -- get page information
-    local zoneId = player:getZoneID()
-    local page = getPageByRegimeId(regimeType, zoneId, regimeId)
+    local page = getPageByRegimeId(player:getCharVar("[regime]type"), player:getCharVar("[regime]zone"), player:getCharVar("[regime]id"))
+    if not page then
+        return
+    end
 
     -- this page is not yet finished
     for i = 1, 4 do
-        if player:getVar("fov_numkilled" .. i) < page[i] then
+        if player:getCharVar("[regime]killed" .. i) < page[i] then
             return
         end
     end
@@ -1310,7 +1331,7 @@ dsp.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
-    if REGIME_WAIT == 0 or player:getVar("fov_LastReward") < vanadielEpoch then
+    if REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
         -- gil
         player:addGil(reward)
         player:messageBasic(dsp.msg.basic.FOV_OBTAINS_GIL, reward)
@@ -1321,24 +1342,20 @@ dsp.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         player:addCurrency("valor_point", tabs)
         player:messageBasic(dsp.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
 
-        player:setVar("fov_LastReward", vanadielEpoch)
+        player:setCharVar("[regime]lastReward", vanadielEpoch)
     end
 
     -- award XP every page completion
     player:addExp(reward)
 
-    -- clear player vars
-    for i = 1, 4 do
-        player:setVar("fov_numkilled" .. i, 0)
-    end
-
     -- repeating regimes
-    if player:getVar("fov_repeat") == 1 then
+    if player:getCharVar("[regime]repeat") == 1 then
+        for i = 1, 4 do
+            player:setCharVar("[regime]killed" .. i, 0)
+        end
+
         player:messageBasic(dsp.msg.basic.FOV_REGIME_BEGINS_ANEW)
     else
-        player:setVar("fov_regimeid", 0)
-        for i = 1, 4 do
-            player:setVar("fov_numneeded" .. i, 0)
-        end
+        clearPlayerVars(player)
     end
 end

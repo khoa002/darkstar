@@ -1,28 +1,13 @@
 -----------------------------------
 -- Area: Temenos E T
--- NPC: Earth_Elemental
-
+--  Mob: Earth Elemental
 -----------------------------------
 require("scripts/globals/limbus");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
 -----------------------------------
 
 function onMobEngaged(mob,target)
 
 end;
-
------------------------------------
--- onMobDeath
------------------------------------
 
 function onMobDeath(mob, player, isKiller)
    local mobID = mob:getID();

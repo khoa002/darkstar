@@ -1,10 +1,10 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Bigclaw
+-- Area: Sea Serpent Grotto
+--  Mob: Bigclaw
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
     dsp.regime.checkRegime(player, mob, 807, 2, dsp.regime.type.GROUNDS)
-end;
+end

@@ -1,19 +1,8 @@
 -----------------------------------
 -- Area: Temenos
--- NPC:
-
+--  Mob: Orichalcum Quadav
 -----------------------------------
 require("scripts/globals/limbus");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
 -----------------------------------
 
 function onMobEngaged(mob,target)
@@ -33,10 +22,6 @@ function onMobEngaged(mob,target)
   GetMobByID(16929005):updateEnmity(target);
   GetMobByID(16929007):updateEnmity(target);
 end;
-
------------------------------------
--- onMobDeath
------------------------------------
 
 function onMobDeath(mob, player, isKiller)
           if (IsMobDead(16929005)==true and IsMobDead(16929006)==true and IsMobDead(16929007)==true) then

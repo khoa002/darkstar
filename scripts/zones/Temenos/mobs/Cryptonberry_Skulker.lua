@@ -1,28 +1,13 @@
 -----------------------------------
 -- Area: Temenos N T
--- NPC: Cryptonberry_Skulker
-
+--  Mob: Cryptonberry Skulker
 -----------------------------------
 require("scripts/globals/limbus");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
 -----------------------------------
 
 function onMobEngaged(mob,target)
 
 end;
-
------------------------------------
--- onMobDeath
------------------------------------
 
 function onMobDeath(mob, player, isKiller)
  if (IsMobDead(16928816)==true and IsMobDead(16928817)==true ) then

@@ -1,16 +1,9 @@
 -----------------------------------
 -- Area: Apollyon SE
---  NPC: Metalloid_Amoeba
-
+--  Mob: Metalloid Amoeba
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

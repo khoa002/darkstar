@@ -7,12 +7,14 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs");
 require("scripts/globals/events/harvest_festivals");
 require("scripts/globals/conquest");
 require("scripts/globals/settings");
+require("scripts/globals/chocobo")
 require("scripts/globals/zone");
 -----------------------------------
 
 function onInitialize(zone)
     zone:registerRegion(1, -292,-10,90 ,-258,10,105);
     applyHalloweenNpcCostumes(zone:getID())
+    dsp.chocobo.initZone(zone)
 end;
 
 function onZoneIn(player,prevZone)
@@ -28,10 +30,10 @@ function onZoneIn(player,prevZone)
     -- MOG HOUSE EXIT
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(161,-2,161,94);
-        if (player:getMainJob() ~= player:getVar("PlayerMainJob")) then
+        if (player:getMainJob() ~= player:getCharVar("PlayerMainJob")) then
             cs = 30004;
         end
-        player:setVar("PlayerMainJob",0);
+        player:setCharVar("PlayerMainJob",0);
     end
     return cs;
 end;
@@ -42,7 +44,7 @@ end;
 
 function onRegionEnter(player,region)
     local regionID =region:GetRegionID();
-    if (regionID==1 and player:getCurrentMission(COP) == DAWN and player:getVar("COP_louverance_story")== 2) then
+    if (regionID==1 and player:getCurrentMission(COP) == dsp.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2) then
         player:startEvent(758);
     end
 end;
@@ -60,6 +62,6 @@ function onEventFinish(player,csid,option)
         player:setHomePoint();
         player:messageSpecial(ID.text.HOMEPOINT_SET);
     elseif (csid == 758) then
-        player:setVar("COP_louverance_story",3);
+        player:setCharVar("COP_louverance_story",3);
     end
 end;

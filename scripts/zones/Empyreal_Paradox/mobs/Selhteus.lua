@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Empyreal Paradox
---  MOB: Selh'teus
+--  Mob: Selh'teus
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
 require("scripts/globals/status");
@@ -11,12 +11,6 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs");
 function onMobInitialize(mob)
     mob:addMod(dsp.mod.REGAIN, 50);
     mob:SetAutoAttackEnabled(false);
-end;
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob, target)
 end;
 
 function onMobFight(mob, target)

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Lufaise Meadows
---  MOB: Leshy
+--  Mob: Leshy
 -----------------------------------
 local ID = require("scripts/zones/Lufaise_Meadows/IDs");
 -----------------------------------
@@ -47,7 +47,4 @@ function onMobRoam(mob)
 end;
 
 function onMobDeath(mob, player, isKiller)
-end;
-
-function onMobDespawn(mob)
 end;

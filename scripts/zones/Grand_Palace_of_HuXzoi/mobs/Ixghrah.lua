@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Grand Palace of HuXzoi
---  MOB: Ix_ghrah
+--  Mob: Ix'ghrah
 -----------------------------------
 require("scripts/globals/status");
 require("scripts/globals/missions");
@@ -13,9 +13,6 @@ function onMobSpawn(mob)
     if (mob:getMod(dsp.mod.HTHRES)) then mob:setMod(dsp.mod.HTHRES,1000); end
 end;
 
-function onMobEngaged(mob,target)
-end;
-
 function onMobFight(mob,target)
     local changeTime = mob:getLocalVar("changeTime");
 
@@ -26,7 +23,7 @@ function onMobFight(mob,target)
 end;
 
 function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == A_FATE_DECIDED  and player:getVar("PromathiaStatus")==1) then
-        player:setVar("PromathiaStatus",2);
+    if (player:getCurrentMission(COP) == dsp.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus")==1) then
+        player:setCharVar("PromathiaStatus",2);
     end
 end;

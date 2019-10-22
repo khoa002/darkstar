@@ -3,31 +3,20 @@
 --  NPC: HomePoint#2
 -- !pos -328 -12 -33 235
 -----------------------------------
-require("scripts/globals/settings");
-local ID = require("scripts/zones/Bastok_Markets/IDs");
-require("scripts/globals/homepoint");
+require("scripts/globals/homepoint")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+local hpEvent = 8701
+local hpIndex = 12
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
+    dsp.homepoint.onTrigger(player, hpEvent, hpIndex)
+end
 
-    homepointMenu(player, 8701, 12);
-end;
+function onEventUpdate(player, csid, option)
+    dsp.homepoint.onEventUpdate(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
-function onEventFinish(player,csid,option)
-
-    if (csid == 8701) then
-
-        if (option == 1) then
-            player:setHomePoint();
-            player:messageSpecial(ID.text.HOMEPOINT_SET);
-        else
-            hpTeleport(player, option);
-        end
-    end
-end;
+function onEventFinish(player, csid, option)
+    dsp.homepoint.onEventFinish(player, csid, option, hpEvent)
+end

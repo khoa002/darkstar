@@ -56,6 +56,7 @@
 
 #include "charentity.h"
 #include "automatonentity.h"
+#include "trustentity.h"
 #include "../ability.h"
 #include "../conquest_system.h"
 #include "../spell.h"
@@ -149,7 +150,7 @@ CCharEntity::CCharEntity()
     m_mkeCurrent = 0;
     m_asaCurrent = 0;
 
-    m_Costum = 0;
+    m_Costume = 0;
     m_Monstrosity = 0;
     m_hasTractor = 0;
     m_hasRaise = 0;
@@ -346,7 +347,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
 
 int8 CCharEntity::getShieldSize()
 {
-    CItemArmor* PItem = (CItemArmor*)(getEquip(SLOT_SUB));
+    CItemEquipment* PItem = (CItemEquipment*)(getEquip(SLOT_SUB));
 
     if (PItem == nullptr) {
         return 0;
@@ -440,15 +441,15 @@ uint32 CCharEntity::GetPlayTime(bool needUpdate)
     return m_PlayTime;
 }
 
-CItemArmor* CCharEntity::getEquip(SLOTTYPE slot)
+CItemEquipment* CCharEntity::getEquip(SLOTTYPE slot)
 {
     uint8 loc = equip[slot];
     uint8 est = equipLoc[slot];
-    CItemArmor* item = nullptr;
+    CItemEquipment* item = nullptr;
 
     if (loc != 0)
     {
-        item = (CItemArmor*)getStorage(est)->GetItem(loc);
+        item = (CItemEquipment*)getStorage(est)->GetItem(loc);
     }
     return item;
 }
@@ -466,6 +467,37 @@ void CCharEntity::ReloadPartyDec()
 bool CCharEntity::ReloadParty()
 {
     return m_reloadParty;
+}
+
+void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
+{
+    if (!PTrust->PAI->IsSpawned())
+        return;
+
+    auto trustIt = std::remove_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
+    if (trustIt != PTrusts.end())
+    {
+        PTrust->PAI->Despawn();
+        PTrusts.erase(trustIt);
+    }
+    if (PParty != nullptr)
+    {
+        PParty->ReloadParty();
+    }
+}
+
+void CCharEntity::ClearTrusts()
+{
+    if (PTrusts.size() == 0)
+    {
+        return;
+    }
+
+    for (auto trust : PTrusts)
+    {
+        trust->PAI->Despawn();
+    }
+    PTrusts.clear();
 }
 
 void CCharEntity::Tick(time_point tick)
@@ -520,12 +552,15 @@ void CCharEntity::PostTick()
         {
             ForAlliance([&](auto PEntity)
             {
-                static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
+                if (PEntity->objtype == TYPE_PC)
+                {
+                    static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
+                }
             });
         }
         // Do not send an update packet when only the position has change
         if (updatemask ^ UPDATE_POS)
-            pushPacket(new CCharUpdatePacket(this));
+        pushPacket(new CCharUpdatePacket(this));
         updatemask = 0;
     }
 }
@@ -584,6 +619,13 @@ bool CCharEntity::CanUseSpell(CSpell* PSpell)
 void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 {
     pushPacket(new CLockOnPacket(this, PNewTarget));
+    PLatentEffectContainer->CheckLatentsTargetChange();
+}
+
+void CCharEntity::OnEngage(CAttackState& state)
+{
+    CBattleEntity::OnEngage(state);
+    PLatentEffectContainer->CheckLatentsTargetChange();
 }
 
 void CCharEntity::OnDisengage(CAttackState& state)
@@ -704,7 +746,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
         if (PSpell->getSkillType() == SKILL_SINGING)
         {
             CItemWeapon* PItem = static_cast<CItemWeapon*>(getEquip(SLOT_RANGED));
-            if (PItem && PItem->isType(ITEM_ARMOR))
+            if (PItem && PItem->isType(ITEM_EQUIPMENT))
             {
                 SKILLTYPE Skilltype = (SKILLTYPE)PItem->getSkillType();
                 if (Skilltype == SKILL_STRING_INSTRUMENT || Skilltype == SKILL_WIND_INSTRUMENT || Skilltype == SKILL_SINGING)
@@ -941,11 +983,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
-        // remove invisible if aggresive
+        // remove invisible if aggressive
         if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT)
         {
             if (PAbility->getValidTarget() & TARGET_ENEMY) {
-                // aggresive action
+                // aggressive action
                 StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
             }
             else if (PAbility->getID() != ABILITY_TRICK_ATTACK) {
@@ -971,7 +1013,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // #TODO: get rid of this to script, too
         if (PAbility->isPetAbility())
         {
-            if (PPet) //is a bp - dont display msg and notify pet
+            if (PPet) //is a bp - don't display msg and notify pet
             {
                 actionList_t& actionList = action.getNewActionList();
                 actionList.ActionTargetID = PTarget->id;
@@ -1528,7 +1570,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.animation = PItem->getAnimationID();
 
-    if (PItem->isType(ITEM_ARMOR))
+    if (PItem->isType(ITEM_EQUIPMENT))
     {
         if (PItem->getMaxCharges() > 1)
         {
@@ -1670,7 +1712,7 @@ void CCharEntity::UpdateMoghancement()
     for (auto containerID : {LOC_MOGSAFE, LOC_MOGSAFE2})
     {
         CItemContainer* PContainer = getStorage(containerID);
-        for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
+        for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
         {
             CItem* PItem = PContainer->GetItem(slotID);
             if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
@@ -1712,7 +1754,7 @@ void CCharEntity::UpdateMoghancement()
         for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = getStorage(containerID);
-            for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
+            for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
             {
                 CItem* PItem = PContainer->GetItem(slotID);
                 if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))

@@ -14,9 +14,9 @@ function onTrigger(player,npc)
 
     local pNation = player:getNation();
     local currentMission = player:getCurrentMission(pNation);
-    local MissionStatus = player:getVar("MissionStatus");
+    local MissionStatus = player:getCharVar("MissionStatus");
     
-    if (player:getCurrentMission(WINDURST) == MOON_READING and MissionStatus >= 3) or (player:hasCompletedMission(WINDURST, MOON_READING)) then
+    if (player:getCurrentMission(WINDURST) == dsp.mission.id.windurst.MOON_READING and MissionStatus >= 3) or (player:hasCompletedMission(WINDURST, dsp.mission.id.windurst.MOON_READING)) then
         player:startEvent(398);
     else
         player:startEvent(67);
@@ -28,7 +28,6 @@ end;
 
 function onEventFinish(player,csid,option)
     if (csid == 398) then
-        player:setVar("SenseEnergy",0);
+        player:setCharVar("SenseEnergy",0);
     end
 end;
-

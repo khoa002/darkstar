@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
---  MOB: Olla Grande
+--  Mob: Olla Grande
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs");
 require("scripts/globals/settings");
-
-function onMobSpawn(mob)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

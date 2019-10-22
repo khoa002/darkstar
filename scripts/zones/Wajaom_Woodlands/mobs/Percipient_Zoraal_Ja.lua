@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
---  MOB: Percipient Zoraal Ja
+--  Mob: Percipient Zoraal Ja
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs");
 
@@ -13,7 +13,4 @@ function onMobDeath(mob, player, isKiller)
             pet:setHP(0);
         end
     end;
-end;
-
-function onMobDespawn(mob)
 end;

@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
---  MOB: Seiryu (Pet version)
+--  Mob: Seiryu (Pet version)
 -----------------------------------
 require("scripts/globals/status");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMonsterMagicPrepare(mob,target)
     if (mob:hasStatusEffect(dsp.effect.HUNDRED_FISTS,0) == false) then

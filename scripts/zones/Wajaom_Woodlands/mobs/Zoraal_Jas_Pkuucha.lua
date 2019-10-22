@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
---  MOB: Zoraal Ja's Pkuucha
+--  Mob: Zoraal Ja's Pkuucha
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs");
 
@@ -38,7 +38,4 @@ function onMobFight(mob, target)
 end;
 
 function onMobDeath(mob, player, isKiller)
-end;
-
-function onMobDespawn(mob)
 end;

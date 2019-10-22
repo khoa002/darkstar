@@ -1,16 +1,9 @@
 -----------------------------------
 -- Area: Temenos N T
---  NPC: Moblin_Dustman
-
+--  Mob: Moblin Dustman
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
 
 function onMobDeath(mob, player, isKiller)
  local mobID = mob:getID();

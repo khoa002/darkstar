@@ -1,6 +1,6 @@
 -----------------------------------
 --
--- Zone: Eastern Adoulin
+-- Zone: Eastern Adoulin (257)
 --
 -----------------------------------
 local ID = require("scripts/zones/Eastern_Adoulin/IDs")
@@ -25,4 +25,3 @@ end;
 
 function onEventFinish(player,csid,option)
 end;
-

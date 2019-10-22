@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Apollyon SE
---  NPC: Ghost_Clot
-
+--  Mob: Ghost Clot
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
     GetMobByID(16932993):updateEnmity(target);

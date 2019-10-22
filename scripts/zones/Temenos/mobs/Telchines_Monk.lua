@@ -1,28 +1,13 @@
 -----------------------------------
 -- Area: Temenos N T
--- NPC:  Telchines_Monk
-
+--  Mob: Telchines Monk
 -----------------------------------
 require("scripts/globals/limbus");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
 -----------------------------------
 
 function onMobEngaged(mob,target)
 
 end;
-
------------------------------------
--- onMobDeath
------------------------------------
 
 function onMobDeath(mob, player, isKiller)
  if (IsMobDead(16928788)==true and IsMobDead(16928789)==true  and IsMobDead(16928792)==true   and IsMobDead(16928793)==true ) then

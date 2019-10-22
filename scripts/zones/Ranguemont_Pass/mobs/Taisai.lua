@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ranguemont Pass
---  MOB: Taisai
+--  Mob: Taisai
 -----------------------------------
 local ID = require("scripts/zones/Ranguemont_Pass/IDs");
 
@@ -38,7 +38,4 @@ function onMobRoam(mob)
 end;
 
 function onMobDeath(mob, player, isKiller)
-end;
-
-function onMobDespawn(mob)
 end;
