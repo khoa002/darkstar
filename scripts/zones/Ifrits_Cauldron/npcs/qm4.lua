@@ -12,10 +12,10 @@ require("scripts/globals/npc_util")
 function onTrade(player,npc,trade)
     -- Adaman Ore: spawn Salamander and Magma for The Pirate's Cove
     if (
-        player:getCurrentMission(BASTOK) == THE_PIRATE_S_COVE and
-        player:getVar("MissionStatus") == 2 and
+        player:getCurrentMission(BASTOK) == dsp.mission.id.bastok.THE_PIRATE_S_COVE and
+        player:getCharVar("MissionStatus") == 2 and
         npcUtil.tradeHas(trade, 646) and
-        npcUtil.popFromQM(player, npc, {ID.mob.PIRATES_COVE_NMS, ID.mob.PIRATES_COVE_NMS + 1}, false)
+        npcUtil.popFromQM(player, npc, {ID.mob.PIRATES_COVE_NMS, ID.mob.PIRATES_COVE_NMS + 1}, {claim=false})
     ) then
         player:confirmTrade()
         GetMobByID(ID.mob.PIRATES_COVE_NMS):lookAt(player:getPos()) -- Salamander

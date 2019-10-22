@@ -1,13 +1,10 @@
 -----------------------------------
 -- Area: FeiYin
---  MOB: Drone
+--  Mob: Drone
 -----------------------------------
 require("scripts/globals/regimes")
 require("scripts/globals/keyitems");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobDeath(mob, player, isKiller)
 

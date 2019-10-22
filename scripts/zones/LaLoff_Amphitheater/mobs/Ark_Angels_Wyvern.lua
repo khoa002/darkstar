@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
---  MOB: Ark Angel's Wyvern
+--  Mob: Ark Angel's Wyvern
 -----------------------------------
 require("scripts/globals/status");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
     local mobid = mob:getID()

@@ -1,14 +1,11 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
---  MOB: Ark Angel's Tiger
+--  Mob: Ark Angel's Tiger
 -----------------------------------
 require("scripts/globals/status");
 -----------------------------------
 
 -- TODO: Implement shared spawning and victory system with Ark Angel's Mandragora.
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
     local mobid = mob:getID()

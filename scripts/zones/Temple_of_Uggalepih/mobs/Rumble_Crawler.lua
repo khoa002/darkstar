@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Temple Of Uggalepih
---  MOB: Rumble Crawler
+-- Area: Temple of Uggalepih
+--  Mob: Rumble Crawler
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------

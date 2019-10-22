@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sacrificial Chamber
---  MOB: Vermilion-eared_Noberry
+--  Mob: Vermilion-eared Noberry
 -- BCNM: Jungle Boogymen
 -----------------------------------
 mixins =
@@ -8,12 +8,11 @@ mixins =
     require("scripts/mixins/families/tonberry"),
     require("scripts/mixins/job_special")
 }
+require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-end
-
-function onMobEngaged(mob,target)
+    mob:setMobMod(dsp.mobMod.SUPERLINK, GetMobByID(mob:getID() - 3):getShortID())
 end
 
 function onMobDeath(mob, player, isKiller)

@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Apollyon SE
---  NPC: Tieholtsodi
-
+--  Mob: Tieholtsodi
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
     GetMobByID(16933007):updateEnmity(target);

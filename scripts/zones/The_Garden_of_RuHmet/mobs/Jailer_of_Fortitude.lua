@@ -1,17 +1,22 @@
 -----------------------------------
 -- Area: The Garden of Ru'Hmet
---  NM:  Jailer of Fortitude
+--   NM: Jailer of Fortitude
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs");
+mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/settings");
 require("scripts/globals/limbus");
 require("scripts/globals/status");
 require("scripts/globals/magic");
 
 function onMobSpawn(mob)
-    -- Give it two hour
-    mob:setMobMod(dsp.mobMod.MAIN_2HOUR, 1);
-    mob:setMobMod(dsp.mobMod.MULTI_2HOUR, 1); -- not currently implemented
+    dsp.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = dsp.jsa.INVINCIBLE, cooldown = 180, hpp = math.random(90, 95)}, -- "Has access to Invincible, which it may use several times."
+        },
+    })
+
     -- Change animation to humanoid w/ prismatic core
     mob:AnimationSub(1);
     mob:setModelId(1169);
@@ -59,10 +64,7 @@ function onMobDeath(mob, player, isKiller)
 end;
 
 function onMobDespawn(mob)
-    local qm1 = GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM);
-    qm1:updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-
-    -- Move it to a random location
-    local qm1position = math.random(1,5);
-    qm1:setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][3]);
+    -- Move QM to random location
+    local pos = math.random(1, 5)
+    GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM):setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][3])
 end;

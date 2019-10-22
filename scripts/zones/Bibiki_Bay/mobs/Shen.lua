@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Bibiki Bay
---  MOB: Shen
+--  Mob: Shen
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobFight(mob,target)
     if (mob:getBattleTime() % 45 == 0) then

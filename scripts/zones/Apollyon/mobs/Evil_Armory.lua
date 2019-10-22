@@ -1,13 +1,9 @@
 -----------------------------------
 -- Area: Apollyon SE
---  NPC: Evil_Armory
-
+--  Mob: Evil Armory
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
     GetMobByID(16933033):updateEnmity(target);

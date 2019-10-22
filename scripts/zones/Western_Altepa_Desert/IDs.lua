@@ -10,26 +10,33 @@ zones[dsp.zone.WESTERN_ALTEPA_DESERT] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED    = 6381, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        FULL_INVENTORY_AFTER_TRADE = 6385, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
-        ITEM_OBTAINED              = 6387, -- Obtained: <item>.
-        GIL_OBTAINED               = 6388, -- Obtained <number> gil.
-        KEYITEM_OBTAINED           = 6390, -- Obtained key item: <keyitem>.
-        ITEMS_OBTAINED             = 6396, -- You obtain <number> <item>!
-        NOTHING_OUT_OF_ORDINARY    = 6401, -- There is nothing out of the ordinary here.
-        CONQUEST_BASE              = 7048, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET     = 7207, -- You can't fish here.
-        DIG_THROW_AWAY             = 7220, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING               = 7222, -- You dig and you dig, but find nothing.
-        THE_DOOR_IS_LOCKED         = 7327, -- The door is locked.
-        DOES_NOT_RESPOND           = 7328, -- It does not respond.
-        CANNOT_REMOVE_FRAG         = 7344, -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
-        ALREADY_OBTAINED_FRAG      = 7345, -- You have already obtained this monument's <keyitem>. Try searching for another.
-        ALREADY_HAVE_ALL_FRAGS     = 7346, -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
-        FOUND_ALL_FRAGS            = 7347, -- You have obtained <keyitem>! You now have all 8 fragments of light!
-        ZILART_MONUMENT            = 7348, -- It is an ancient Zilart monument.
-        SENSE_OMINOUS_PRESENCE     = 7392, -- You sense an ominous presence...
-        REGIME_REGISTERED          = 9809, -- New training regime registered!
+        ITEM_CANNOT_BE_OBTAINED    = 6382,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        FULL_INVENTORY_AFTER_TRADE = 6386,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
+        ITEM_OBTAINED              = 6388,  -- Obtained: <item>.
+        GIL_OBTAINED               = 6389,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED           = 6391,  -- Obtained key item: <keyitem>.
+        ITEMS_OBTAINED             = 6397,  -- You obtain <number> <item>!
+        NOTHING_OUT_OF_ORDINARY    = 6402,  -- There is nothing out of the ordinary here.
+        CONQUEST_BASE              = 7049,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET     = 7208,  -- You can't fish here.
+        DIG_THROW_AWAY             = 7221,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING               = 7223,  -- You dig and you dig, but find nothing.
+        THE_DOOR_IS_LOCKED         = 7328,  -- The door is locked.
+        DOES_NOT_RESPOND           = 7329,  -- It does not respond.
+        CANNOT_REMOVE_FRAG         = 7345,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
+        ALREADY_OBTAINED_FRAG      = 7346,  -- You have already obtained this monument's <keyitem>. Try searching for another.
+        ALREADY_HAVE_ALL_FRAGS     = 7347,  -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
+        FOUND_ALL_FRAGS            = 7348,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
+        ZILART_MONUMENT            = 7349,  -- It is an ancient Zilart monument.
+        SENSE_OMINOUS_PRESENCE     = 7395,  -- You sense an ominous presence...
+        SOMETHING_IS_BURIED_HERE   = 7413,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        PLAYER_OBTAINS_ITEM        = 7626,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 7627,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 7628,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 7629,  -- You already possess that temporary item.
+        NO_COMBINATION             = 7634,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 9812,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 11801, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -49,6 +56,11 @@ zones[dsp.zone.WESTERN_ALTEPA_DESERT] =
             [17289474] = 17289453, -- 118.575 -0.299 127.016
             [17289277] = 17289453, -- 99.000 -0.030 116.000
         },
+        CALCHAS_PH =
+        {
+            [17289545] = 17289547,
+            [17289546] = 17289547,
+        },
         KING_VINEGARROON     = 17289575,
         SABOTENDER_ENAMORADO = 17289653,
         EASTERN_SPHINX       = 17289654,
@@ -57,6 +69,20 @@ zones[dsp.zone.WESTERN_ALTEPA_DESERT] =
     },
     npc =
     {
+        CASKET_BASE       = 17289720,
+        ALTEPA_GATE       = 17289744,
+        PEDDLESTOX        = 17289769,
+        BEASTMEN_TREASURE =
+        {
+            17289772, -- qm3
+            17289773, -- qm4
+            17289774, -- qm5
+            17289775, -- qm6
+            17289776, -- qm7
+            17289777, -- qm8
+            17289778, -- qm9
+            17289779, -- qm10
+        },
     },
 }
 

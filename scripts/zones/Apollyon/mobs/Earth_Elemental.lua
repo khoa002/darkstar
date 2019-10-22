@@ -1,16 +1,9 @@
 -----------------------------------
 -- Area: Apollyon SW
---  NPC: elemental
-
+--  Mob: Earth Elemental
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

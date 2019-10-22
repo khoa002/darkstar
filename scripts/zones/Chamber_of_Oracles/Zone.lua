@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Chamber_of_Oracles/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
 
 function onInitialize(zone)
@@ -18,14 +19,14 @@ end;
 
 function onZoneIn(player,prevZone)
     local CurrentMission = player:getCurrentMission(WINDURST);
-    local MissionStatus = player:getVar("MissionStatus");
+    local MissionStatus = player:getCharVar("MissionStatus");
     local cs = -1;
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-177.804,-2.765,-37.893,179);
     end
 
-    if (prevZone == 208 and CurrentMission == MOON_READING and MissionStatus >= 1) then
+    if (prevZone == dsp.zone.QUICKSAND_CAVES and CurrentMission == dsp.mission.id.windurst.MOON_READING and MissionStatus >= 1) then
         cs = 3;
     end
 

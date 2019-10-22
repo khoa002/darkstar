@@ -1,20 +1,16 @@
 -----------------------------------
 -- Area: Temenos W T
---  NPC: Enhanced_Mandragora
-
+--  Mob: Enhanced Mandragora
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
 
 end;
 
 function onMobDeath(mob, player, isKiller)
-local cofferID=Randomcoffer(2,GetInstanceRegion(1298));
+local cofferID=Randomcoffer(2,Temenos_Western_Tower);
     local mobX = mob:getXPos();
     local mobY = mob:getYPos();
     local mobZ = mob:getZPos();

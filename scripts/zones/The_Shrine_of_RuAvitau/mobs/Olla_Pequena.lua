@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
---  MOB: Olla Pequena
+--  Mob: Olla Pequena
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs");
 require("scripts/globals/settings");
-
-function onMobSpawn(mob)
-end;
 
 function onMobDeath(mob, player, isKiller)
     if (isKiller) then

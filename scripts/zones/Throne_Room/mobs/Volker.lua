@@ -1,13 +1,10 @@
 -----------------------------------
 -- Area: Throne Room
---  MOB: Volker
+--  Mob: Volker
 -- Ally during Bastok Mission 9-2
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs");
 require("scripts/globals/status");
-
-function onMobInitialize(mob)
-end
 
 function onMobSpawn(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)

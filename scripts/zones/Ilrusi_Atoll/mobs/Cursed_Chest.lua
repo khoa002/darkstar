@@ -1,12 +1,9 @@
 -----------------------------------
--- Area: Illrusi atoll
---  MOB: Cursed Chest
+-- Area: Ilrusi Atoll
+--  Mob: Cursed Chest
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-
-function onMobInitialize(mob)
-end
 
 function onMobFight(mob,target)
     local PX = target:getXPos()

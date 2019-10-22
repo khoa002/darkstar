@@ -52,8 +52,8 @@ function onInstanceComplete(instance)
     local chars = instance:getChars();
 
     for i,v in pairs(chars) do
-        if (v:getCurrentMission(TOAU) == NASHMEIRAS_PLEA and v:getVar("AhtUrganStatus") == 1) then
-            v:setVar("AhtUrganStatus", 2);
+        if (v:getCurrentMission(TOAU) == dsp.mission.id.toau.NASHMEIRAS_PLEA and v:getCharVar("AhtUrganStatus") == 1) then
+            v:setCharVar("AhtUrganStatus", 2);
         end
 
         v:setPos(0,0,0,0,72);
@@ -73,4 +73,3 @@ function onEventFinish(player,csid,option)
         player:setPos(-444,-4,420,127);
     end
 end;
-

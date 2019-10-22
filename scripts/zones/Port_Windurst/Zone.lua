@@ -10,7 +10,7 @@ require("scripts/globals/zone");
 -----------------------------------
 
 function onInitialize(zone)
-    SetExplorerMoogles(ID.npc.PORT_W_EXPLORER_MOOGLE);
+    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE);
 end;
 
 function onZoneIn(player,prevZone)
@@ -24,16 +24,16 @@ function onZoneIn(player,prevZone)
         player:setHomePoint();
     end
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == 225) then
+        if (prevZone == dsp.zone.WINDURST_JEUNO_AIRSHIP) then
             cs = 10004;
             player:setPos(228.000, -3.000, 76.000, 160);
         else
             position = math.random(1,5) + 195;
             player:setPos(position,-15.56,258,65);
-            if (player:getMainJob() ~= player:getVar("PlayerMainJob")) then
+            if (player:getMainJob() ~= player:getCharVar("PlayerMainJob")) then
                 cs = 30004;
             end
-            player:setVar("PlayerMainJob",0);
+            player:setCharVar("PlayerMainJob",0);
         end
     end
     return cs;

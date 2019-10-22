@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Yuhtunga Jungle
---  MOB: Tipha
+--  Mob: Tipha
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs");
 
@@ -10,6 +10,6 @@ end;
 
 function onMobDeath(mob, player, isKiller)
     if (isKiller and GetMobByID(ID.mob.CARTHI):isDead()) then
-        GetNPCByID(ID.npc.YUHTUNGA_CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900);
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900);
     end
 end;

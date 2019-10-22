@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Empyreal Paradox
---  MOB: Prishe
+--  Mob: Prishe
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
@@ -9,9 +9,6 @@ require("scripts/globals/status")
 
 function onMobInitialize(mob)
     mob:addMod(dsp.mod.REGAIN, 30)
-end
-
-function onMobSpawn(mob)
 end
 
 function onMobRoam(mob)

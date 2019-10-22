@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Nyzul Isle (Path of Darkness)
---  MOB: Amnaf Psycheflayer
+--  Mob: Amnaf Psycheflayer
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status");
@@ -21,9 +21,6 @@ function onMobEngaged(mob,target)
     local naja = mob:getInstance():getEntity(bit.band(ID.mob[58].NAJA, 0xFFF))
     naja:setLocalVar("ready",1)
     mob:showText(mob,ID.text.CANNOT_LET_YOU_PASS);
-end;
-
-function onMobFight(mob,target)
 end;
 
 --[[

@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Apollyon SE
---  NPC: Grave_Digger
-
+--  Mob: Grave Digger
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobEngaged(mob,target)
     GetMobByID(16933021):updateEnmity(target);

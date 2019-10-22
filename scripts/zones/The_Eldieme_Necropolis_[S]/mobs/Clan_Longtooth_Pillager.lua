@@ -1,21 +1,9 @@
 -----------------------------------
--- Area: The Eldieme Necropolis (S) (175)
---  MOB: Clan_Longtooth_Pillager
+-- Area: The Eldieme Necropolis [S] (175)
+--  Mob: Clan Longtooth Pillager
 -----------------------------------
 
 -- -----------------------------------
-
-function onMobInitialize(mob)
-end;
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
-
-function onMobFight(mob,target)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

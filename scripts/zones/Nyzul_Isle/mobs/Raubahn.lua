@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Nyzul Isle (Nashmeira's Plea)
---  MOB: Raubahn
+--  Mob: Raubahn
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status");
@@ -124,7 +124,4 @@ function onMobDeath(mob, player, isKiller)
     if (isKiller and mob:getMobMod(dsp.mobMod.BEHAVIOR) == 0) then
         mob:showText(mob,ID.text.MIRACLE);
     end
-end;
-
-function onMobDespawn(mob)
 end;

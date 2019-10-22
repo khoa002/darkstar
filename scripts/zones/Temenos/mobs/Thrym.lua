@@ -1,29 +1,14 @@
 -----------------------------------
 -- Area: Temenos N T
--- NPC: Thrym
-
+--  Mob: Thrym
 -----------------------------------
 require("scripts/globals/limbus");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
 -----------------------------------
 
 function onMobEngaged(mob,target)
     GetMobByID(16928781):updateEnmity(target);
         GetMobByID(16928783):updateEnmity(target);
 end;
-
------------------------------------
--- onMobDeath
------------------------------------
 
 function onMobDeath(mob, player, isKiller)
 

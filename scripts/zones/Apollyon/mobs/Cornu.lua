@@ -1,16 +1,9 @@
 -----------------------------------
 -- Area: Apollyon NE
---  NPC: Sirins
-
+--  Mob: Cornu
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

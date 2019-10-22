@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: The Garden of Ru'Hmet
---  MOB: Aw_aern PH (Ix'Aern DRK and DRG)
+--  Mob: Aw'aern
+-- Note: PH for Ix'Aern DRK and DRG
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs");
 -----------------------------------
@@ -9,7 +10,7 @@ function onMobSpawn(mob)
     local IxAernDRG_PH = GetServerVariable("[SEA]IxAernDRG_PH"); -- Should be be the ID of the mob that spawns the actual PH
 
     -- Pick the Ix'Aern (DRG) PH if the server doesn't have one, and the if the actual PH/NM isn't up. Then, set it.
-    if (GetMobAction(ID.mob.IXAERN_DRG) == 0 and GetServerVariable("[SEA]IxAernDRG_PH") == 0) then  -- This should be cleared when the mob is killed.
+    if not GetMobByID(ID.mob.IXAERN_DRG):isSpawned() and GetServerVariable("[SEA]IxAernDRG_PH") == 0 then  -- This should be cleared when the mob is killed.
         local groups = ID.mob.AWAERN_DRG_GROUPS
         IxAernDRG_PH = groups[math.random(1, #groups)] + math.random(0, 2); -- The 4th mobid in each group is a pet. F that son
         SetServerVariable("[SEA]IxAernDRG_PH", IxAernDRG_PH);

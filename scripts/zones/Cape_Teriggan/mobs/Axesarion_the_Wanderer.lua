@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cape Teriggan
---  NM:  Axesarion the Wanderer
+--   NM: Axesarion the Wanderer
 -----------------------------------
 local ID = require("scripts/zones/Cape_Teriggan/IDs");
 
@@ -10,6 +10,6 @@ end;
 
 function onMobDeath(mob, player, isKiller)
     if (isKiller) then
-        GetNPCByID(ID.npc.TERIGGAN_CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900);
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900);
     end
 end;

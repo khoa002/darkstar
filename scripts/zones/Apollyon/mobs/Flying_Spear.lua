@@ -1,15 +1,9 @@
 -----------------------------------
 -- Area: Apollyon SE
---  NPC: Flying_Spear
+--  Mob: Flying Spear
 -----------------------------------
 require("scripts/globals/limbus");
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

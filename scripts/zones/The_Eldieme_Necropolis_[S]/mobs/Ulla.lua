@@ -1,22 +1,9 @@
 -----------------------------------
--- Area: The Eldieme Necropolis (S) (175)
---  MOB: Ulla
+-- Area: The Eldieme Necropolis [S] (175)
+--  Mob: Ulla
 -----------------------------------
 
 -- -----------------------------------
 
-function onMobInitialize(mob)
-end;
-
-function onMobSpawn(mob)
-end;
-
-function onMobEngaged(mob,target)
-end;
-
-function onMobFight(mob,target)
-end;
-
 function onMobDeath(mob, player, isKiller)
 end;
-

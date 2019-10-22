@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
---  MOB: Suzaku (Pet version)
+--  Mob: Suzaku (Pet version)
 -----------------------------------
-
-function onMobSpawn(mob)
-end;
 
 function onMobDeath(mob, player, isKiller)
 end;

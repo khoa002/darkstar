@@ -62,6 +62,7 @@ function onUseAbility(player,target,ability,action)
         player:addItem(stolen)
         target:itemStolen()
         ability:setMsg(dsp.msg.basic.STEAL_SUCCESS) -- Item stolen successfully
+        target:triggerListener("ITEM_STOLEN", target, player, stolen)
     else
         ability:setMsg(dsp.msg.basic.STEAL_FAIL) -- Failed to steal
         action:animation(target:getID(), 182)
@@ -103,7 +104,7 @@ end
 function checkThfAfQuest(player, target)
     local targid = target:getID()
 
-    if (player:getVar("theTenshodoShowdownCS") == 3) then
+    if (player:getCharVar("theTenshodoShowdownCS") == 3) then
         for key, value in pairs(validThfQuestMobs) do
             if value == targid then
                 return true

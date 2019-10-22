@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Ashu Talif (The Black Coffin)
--- MOB: Gessho
+--  Mob: Gessho
 -- TOAU-15 Mission Battle
 -----------------------------------
 
@@ -11,9 +11,6 @@ require("scripts/globals/instance");
 require("scripts/globals/status");
 require("scripts/globals/magic");
 -----------------------------------
-
-function onMobInitialize(mob)
-end;
 
 function onMobSpawn(mob)
     -- Gessho will engage by himself ~1min in if you stall too long.

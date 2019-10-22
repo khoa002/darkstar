@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 
 function onTrade(player,npc,trade)
 
-    local thickAsThievesGamblingCS = player:getVar("thickAsThievesGamblingCS")
+    local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
     if npcUtil.tradeHas(trade, 534) then -- Trade 1x gaussbit wildgrass
         if thickAsThievesGamblingCS == 3 then
@@ -50,13 +50,10 @@ function onEventFinish(player,csid,option)
     elseif csid == 140 and option == 1 then -- player looses dice game
         player:confirmTrade()
         player:messageSpecial(ID.text.GOBLIN_BEAT_YOU)
-        if OLD_SCHOOL_ENABLED then
-            player:setVar("thickAsThievesGamblingCS",-1) -- start over
-        end
     elseif csid == 137 and option == 0 then -- player wins dice game
         player:confirmTrade()
         player:messageSpecial(ID.text.YOU_BEAT_GOBLIN)
-        player:setVar("thickAsThievesGamblingCS",4)
+        player:setCharVar("thickAsThievesGamblingCS",4)
     end
 
 end
